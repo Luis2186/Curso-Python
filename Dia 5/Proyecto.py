@@ -28,7 +28,8 @@ def chequearLetra(letra_usuario, palabra_lista):
     for item in palabra_lista:
         if letra_usuario == item['valorOculto']:
             item['valorActual'] = item['valorOculto']
-    
+            return True
+    return False
 
 def palabra_adivinada(palabra_lista):
 
@@ -61,14 +62,15 @@ def iniciar_ahorcado():
             print(f"!Ha ganado! La palabra oculta era {palabra_elegida}, !Gracias por jugar!")
             return
 
-        chequearLetra(letra_ingresada,palabra_lista)
+        letra_encontrada = chequearLetra(letra_ingresada,palabra_lista)
         imprimirResultado(palabra_lista)
 
         if palabra_adivinada(palabra_lista):
             print(f"!Ha ganado! La palabra oculta era {palabra_elegida}, !Gracias por jugar!")
             return
 
-        cantidad_de_vidas-=1
+        if not letra_encontrada :
+            cantidad_de_vidas-=1
 
     if cantidad_de_vidas == 0:
         print(f"Se han terminado las vidas, la palabra oculta era {palabra_elegida}, !Vuelve a intentarlo!")
